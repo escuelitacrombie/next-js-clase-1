@@ -15,4 +15,14 @@ model Product {
   name        String
   description String
   price       Float
+
+  @@map("products")
+}
+
+model User {
+  id           Int    @id @default(autoincrement())
+  email        String @unique
+  hashPassword String
+
+  @@map("users")
 }
