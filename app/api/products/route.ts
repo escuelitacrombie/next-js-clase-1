@@ -1,11 +1,20 @@
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req:NextRequest) => {
+export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
-    
-  } catch (error) {
-    
+    const result = await prisma.product.findMany()
+    return NextResponse.json(result)
+  } catch (err) {
+    const error = err as { message: string };
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
   }
 }
 
@@ -34,14 +43,14 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
-    const id  = await req.json()
+    const { id } = await req.json()
 
     const result = await prisma.product.delete({
-      where: id
+      where: {
+        id: id
+      },
     })
-    return NextResponse.json(result, {
-      status: 200,
-    })
+    return NextResponse.json(result, { status: 200 })
   } catch (err) {
     const error = err as { message: string };
     return NextResponse.json(
@@ -49,13 +58,13 @@ export const DELETE = async (req: NextRequest) => {
         message: error.message,
       },
       {
-        status: 400,
+        status: 500,
       }
     );
   }
-}
+};
 
-export const PUT = async (req: NextRequest) => {
+export const PUT = async (req: Request) => {
   try {
     const { id } = await req.json()
     const body = await req.json()

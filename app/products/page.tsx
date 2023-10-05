@@ -1,10 +1,10 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
+import ProductButtons from "@/components/ProductButtons";
 
 export default async function Page() {
   const allProducts = await prisma.product.findMany();
-
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       <h1> Todos los productos </h1>
@@ -15,6 +15,7 @@ export default async function Page() {
           <p>{product.description}</p>
           <p>{product.price}</p>
           <Image src={`/${product.image}`} alt={product.name} width={10} height={10}/>
+          <ProductButtons id={product.id}/>
         </div>
       ))}
 
