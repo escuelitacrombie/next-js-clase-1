@@ -4,10 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
-
-
-    
-
+    console.log(body);
     const result = await prisma.product.create({
       data: body,
     });
@@ -32,8 +29,6 @@ export const DELETE = async (req: NextRequest) => {
 
     const body = await req.json();    
 
-    console.log("adsad");
-
     const idFromApi = parseInt(body.id)
 
     const result = await prisma.product.delete({
@@ -55,3 +50,32 @@ export const DELETE = async (req: NextRequest) => {
   }
 };
 
+export const UPDATE = async (req: NextRequest) => {
+  try {
+    const body = await req.json();
+    const result = await prisma.product.update({
+      where: {
+        id: body.id
+      },
+      data: {
+        name: body.name,
+        description: body.description,
+        price: body.price,
+      }
+    });
+
+    return NextResponse.json(result, {
+      status: 200,
+    });
+  } catch (err) {
+    console.error("Error al actualizar el producto:", err);
+    return NextResponse.json(
+      {
+        message: "Error al actualizar el producto.",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+};

@@ -2,3 +2,14 @@
 const nextConfig = {}
 
 module.exports = nextConfig
+
+module.exports = {
+    images: {
+      domains: ['static.vecteezy.com']
+    },
+  };
+ 
+  
+  
+  
+  

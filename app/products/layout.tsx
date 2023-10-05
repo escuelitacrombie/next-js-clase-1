@@ -7,10 +7,14 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+
+  let b = false;
+
   return <div className="bg-gray-400">
      <nav className='gap-3'>
-        <Link className='pr-5' href="products/create">create product</Link>
-        <Link className='pr-5' href="products/delete">delete product</Link>
+        <Link className='pr-5' href="/products/create">create product</Link>
+        <Link className='pr-5' href="/products/delete">delete product</Link>
+        <Link className='pr-5' href="/products/update">update product</Link>
     </nav>
     {children}
     </div>;
