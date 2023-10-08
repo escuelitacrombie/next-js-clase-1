@@ -15,7 +15,7 @@ export default async function Page() {
           <p>{product.description}</p>
           <p>{product.price}</p>
           <Image src={`/${product.image}`} alt={product.name} width={10} height={10}/>
-          <ProductButtons id={product.id}/>
+          <ProductButtons productId={product.id} />
         </div>
       ))}
 
