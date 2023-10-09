@@ -5,6 +5,7 @@ type FormValue = {
   description?: string;
   name?: string;
   price?: string;
+  photo?:string;
 };
 
 export default function Page() {
@@ -32,18 +33,27 @@ export default function Page() {
       <h1> Crear producto </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input onChange={handleChangeInput} type="text" name="name" id="name" />
+        <input onChange={handleChangeInput} type="text" name="name" id="name" placeholder="name" />
         <input
           onChange={handleChangeInput}
           type="text"
           name="description"
           id="description"
+          placeholder="description"
         />
         <input
           onChange={handleChangeInput}
           type="number"
           name="price"
           id="price"
+          placeholder="price"
+        />
+        <input
+          onChange={handleChangeInput}
+          type="text"
+          name="photo"
+          id="photo"
+          placeholder="photo"
         />
         <button type="submit">Submit</button>
       </form>
