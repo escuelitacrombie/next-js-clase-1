@@ -5,6 +5,7 @@ type FormValue = {
   description?: string;
   name?: string;
   price?: string;
+  img?: string;
 };
 
 export default function Page() {
@@ -44,6 +45,12 @@ export default function Page() {
           type="number"
           name="price"
           id="price"
+        />
+        <input
+          onChange={handleChangeInput}
+          type="text"
+          name="img"
+          id="img"
         />
         <button type="submit">Submit</button>
       </form>
