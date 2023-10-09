@@ -24,12 +24,11 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-export const DELETE = async (req: NextRequest) => {
-  try {
+export const DELETE = async (req: NextRequest, {params} : any) => {
+  try { 
 
-    const body = await req.json();    
-
-    const idFromApi = parseInt(body.id)
+    const idFromApi = params.id
+    
 
     const result = await prisma.product.delete({
       where:{id: idFromApi}
@@ -64,6 +63,28 @@ export const UPDATE = async (req: NextRequest) => {
       }
     });
 
+    return NextResponse.json(result, {
+      status: 200,
+    });
+  } catch (err) {
+    console.error("Error al actualizar el producto:", err);
+    return NextResponse.json(
+      {
+        message: "Error al actualizar el producto.",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+};
+
+
+
+
+export const GET = async (req: NextRequest) => {
+  try {
+    const result =  await prisma.product.findMany();
     return NextResponse.json(result, {
       status: 200,
     });

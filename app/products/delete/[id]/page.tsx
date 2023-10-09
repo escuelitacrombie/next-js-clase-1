@@ -1,4 +1,6 @@
 'use client'
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react'
 
 type FormValue = {
@@ -8,31 +10,27 @@ type FormValue = {
 
 export default async function page (){
 
-    const [values, setValues] = useState<FormValue>({id: 0});
+  const { id } = useParams()
 
     const handleSubmit = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
         
           e.preventDefault();
     
-          fetch(`/api/products/`, {
+          fetch(`/api/products/${id}`, {
             method: "DELETE",
-            body: JSON.stringify(values),
           });
         },
-        [values]
+        []
       );
 
-      const handleChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-      }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-    <h1> ELIMINAR PRODUCTO </h1>
+    <h1> ELIMINAR PRODUCTO por id</h1>
 
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <input onChange={handleChangeInput} type="text" name="id" id="name" />
+      <label htmlFor="">{id}</label>
       <button type="submit">Submit</button>
     </form>
   </main>
