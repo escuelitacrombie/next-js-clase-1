@@ -1,19 +1,14 @@
 "use client"
 
 import UpdateProduct from "@/components/UpdateProduct"
-import prisma from "@/lib/prisma"
 import { useParams } from "next/navigation"
+import getProduct from "./getProduct"
 
-
-export default async function Page() {
+export default function Page() {
     const productId = Number(useParams().id)
 
-    const result = await fetch(`/api/products/${productId}`, {
-        method: "GET",
-    })
-
-    const product = await result.json()
-
+    const product = getProduct(productId)
+    
     return (
         <main className="flex flex-col items-center">
             <h1>Product {productId}</h1>

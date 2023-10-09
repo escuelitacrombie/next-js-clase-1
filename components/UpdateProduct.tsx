@@ -13,13 +13,10 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        const parsedFormValues = { ...values, price: Number(values?.price) };
         await fetch(`/api/products/${props.productId.toString()}`, {
             method: "PUT",
-            body: JSON.stringify({
-                ...values,
-                id: props.productId,
-                price: Number(values?.price),
-            })
+            body: JSON.stringify(parsedFormValues)
         })
     }
 
@@ -34,28 +31,28 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
                 <input
                     onChange={handleChangeInput}
                     type="text"
-                    defaultValue={props.product?.name}
+                    value={props.product?.name}
                     name="name"
                     id="name"
                 />
                 <input
                     onChange={handleChangeInput}
                     type="text"
-                    defaultValue={props.product?.description}
+                    value={props.product?.description}
                     name="description"
                     id="description"
                 />
                 <input
                     onChange={handleChangeInput}
                     type="text"
-                    defaultValue={props.product?.price?.toString()}
+                    value={props.product?.price?.toString()}
                     name="price"
                     id="price"
                 />
                 <input
                     onChange={handleChangeInput}
                     type="text"
-                    defaultValue={props.product?.img}
+                    value={props.product?.img}
                     name="img"
                     id="img"
                 />
