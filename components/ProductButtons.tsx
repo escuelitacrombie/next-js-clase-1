@@ -1,18 +1,22 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const ProductButtons = (props: {
     productId: Number,
     data?: {}
 }) => {
 
+    const router = useRouter()
+
     const handleDelete = async () => {
         await fetch("/api/products", {
             method: "DELETE",
             body: JSON.stringify(props.productId)
         })
-        window.location.reload()
+        console.log(props.productId);
+        router.refresh()
     }
 
     return (

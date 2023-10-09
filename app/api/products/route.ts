@@ -43,7 +43,7 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
-    const { id } = await req.json()
+    const id  = await req.json()
 
     const result = await prisma.product.delete({
       where: {
