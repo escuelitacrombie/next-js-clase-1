@@ -1,4 +1,6 @@
 "use client";
+
+import { useRouter } from "next/navigation";
 import { useState, useCallback, ChangeEvent, FormEvent } from "react";
 
 type FormValue = {
@@ -10,6 +12,7 @@ type FormValue = {
 
 export default function Page() {
   const [values, setValues] = useState<FormValue>({});
+  const router=useRouter();
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -20,6 +23,10 @@ export default function Page() {
         method: "POST",
         body: JSON.stringify(parsedFormValues),
       });
+      router.push("http://localhost:3000/products");
+      setTimeout(()=>{
+        router.refresh()
+      },2000)
     },
     [values]
   );

@@ -19,7 +19,9 @@ export default function CardButton( {params}:{params:{id:number}}) {
         }
   return (
     <div>
-        <button onClick={()=>{
+        <button
+        className='bg-red-500 border-red-800'
+        onClick={()=>{
             deleteProduct(params.id)
         }} >ELIMINAR {params.id}</button>
     </div>
