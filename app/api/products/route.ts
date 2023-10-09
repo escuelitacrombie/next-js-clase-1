@@ -64,26 +64,3 @@ export const DELETE = async (req: NextRequest) => {
   }
 };
 
-export const PUT = async (req: Request) => {
-  try {
-    const { id } = await req.json()
-    const body = await req.json()
-    const result = await prisma.product.update({
-      where: id,
-      data: body
-    })
-    return NextResponse.json(result, {
-      status: 200,
-    })
-  } catch (err) {
-    const error = err as { message: string };
-    return NextResponse.json(
-      {
-        message: error.message,
-      },
-      {
-        status: 400,
-      }
-    );
-  }
-}

@@ -15,7 +15,6 @@ const ProductButtons = (props: {
             method: "DELETE",
             body: JSON.stringify(props.productId)
         })
-        console.log(props.productId);
         router.refresh()
     }
 

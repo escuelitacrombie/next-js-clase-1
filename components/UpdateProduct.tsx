@@ -1,9 +1,13 @@
 "use client"
 
 import { FormValue } from "@/app/products/create/page"
+import Link from "next/link"
 import React, { useState, ChangeEvent, FormEvent, useCallback } from "react"
 
+
 const UpdateProduct = (props: { product: any, productId: number }) => {
+    console.log(props.product);
+    
     const [values, setValues] = useState<FormValue>()
 
     const handleChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +18,7 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
         e.preventDefault()
 
         const parsedFormValues = { ...values, price: Number(values?.price) };
-        await fetch(`/api/products/${props.productId.toString()}`, {
+        await fetch(`/api/products/${props.productId}`, {
             method: "PUT",
             body: JSON.stringify(parsedFormValues)
         })
@@ -22,7 +26,6 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
 
     return (
         <div>
-            {" "}
             <form
                 action="submit"
                 onSubmit={handleSubmit}
@@ -34,6 +37,7 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
                     value={props.product?.name}
                     name="name"
                     id="name"
+                    placeholder=""
                 />
                 <input
                     onChange={handleChangeInput}
@@ -52,11 +56,12 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
                 <input
                     onChange={handleChangeInput}
                     type="text"
-                    value={props.product?.img}
-                    name="img"
-                    id="img"
+                    value={props.product?.image}
+                    name="image"
+                    id="image"
                 />
-                <button>Save Changes</button>
+                <button>Guardar</button>
+                <Link href="/products">Volver</Link>
             </form>
         </div>
     )
