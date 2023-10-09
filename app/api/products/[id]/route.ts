@@ -1,9 +1,8 @@
 import prisma from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { Product } from "@prisma/client";
 
-export async function DELETE(req: Request, { params }: Params) {
+export async function DELETE(req: Request, { params }: {params:Product}) {
 
     const deletedProduct = await prisma.product.delete({
         where: {
@@ -18,7 +17,7 @@ export async function DELETE(req: Request, { params }: Params) {
 
 }
 
-export async function PUT(req: Request, { params }: Params) {
+export async function PUT(req: Request, { params }: {params:Product}) {
 
         const { name, photo, price,description } = await req.json();
         const updatedProduct = await prisma.product.update({

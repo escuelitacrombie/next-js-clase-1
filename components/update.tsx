@@ -1,7 +1,10 @@
 "use client"
+
+import { useRouter } from 'next/navigation';
 import {useState} from 'react'
 
 type FormValue = {
+    id?:number
     description?: string;
     name?: string;
     price?: number;
@@ -14,15 +17,17 @@ export default function UpdateProduct({params}:{params:{id:number}}) {
     const [precio, setPrice] =useState("");
     const [description, setDescription] =useState("");
     
+    const router = useRouter()
 
     async function update( dat:FormValue,id: number) {
+        dat.id=id;
         const res = await fetch('/api/products/' + id, {
           method: 'PUT',
           body: JSON.stringify(dat),
         })
         const data = await res.json()
         console.log("producto ", id, " EDITADO")
-    
+        router.refresh()
       }
   return (
     <div>

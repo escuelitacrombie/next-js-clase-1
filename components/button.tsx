@@ -1,13 +1,22 @@
 "use client"
 import React from 'react'
-async function deleteProduct(id: number) {
-    const res = await fetch('/api/products/' + id, {
-      method: 'DELETE',
-    })
-    const data = await res.json()
-    console.log("producto ", id, " eliminado")
-  }
+import { useRouter } from 'next/navigation';
+
+
+
+
+
+
 export default function CardButton( {params}:{params:{id:number}}) {
+      const router = useRouter()
+      async function deleteProduct(id: number) {
+        const res = await fetch('/api/products/' + id, {
+            method: 'DELETE',
+          })
+          const data = await res.json()
+          console.log("producto ", id, " eliminado")
+          router.refresh()
+        }
   return (
     <div>
         <button onClick={()=>{
