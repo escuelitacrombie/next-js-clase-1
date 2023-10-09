@@ -1,11 +1,14 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { FormValue } from "@/app/products/create/page";
 import React, { useState, ChangeEvent, FormEvent, useCallback } from "react";
 
 const EditForm = (props: { product: any; productId: number }) => {
-  const [values, setValues] = useState<FormValue>();
+  const [values, setValues] = useState<FormValue>({
+    ...props.product,
+  });
 
+  const router = useRouter();
   const handleChangeInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
@@ -20,6 +23,8 @@ const EditForm = (props: { product: any; productId: number }) => {
         id: props.productId,
         price: Number(values?.price),
       }),
+    }).then(() => {
+      router.push("/products");
     });
   };
 

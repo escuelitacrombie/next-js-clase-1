@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback, ChangeEvent, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
 
 export type FormValue = {
@@ -11,7 +12,7 @@ export type FormValue = {
 
 export default function Page() {
   const [values, setValues] = useState<FormValue>({});
-
+  const router = useRouter();
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -52,7 +53,14 @@ export default function Page() {
         />
         <label htmlFor="img">Image</label>
         <input onChange={handleChangeInput} type="text" name="img" id="img" />
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          onClick={() => {
+            router.push("/products");
+          }}
+        >
+          Submit
+        </button>
       </form>
     </main>
   );

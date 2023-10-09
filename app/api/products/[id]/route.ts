@@ -29,21 +29,24 @@ const productId = parseInt(params.id)
 }
 
 
-export const PUT = async (req: NextRequest) => {
+export const PUT = async (
+  req: Request,
+  { params }: { params: { id: string } }
+) => {
     try {
       const data = await req.json();
-
-
-     const updateProduct = await prisma.product.update({
+      const productId =params.id
+      console.log(Number(productId), data)
+     const updatedProduct = await prisma.product.update({
     where: {
-      id: data.id,
+      id: Number(productId),
     },
     data: {
         ...data
     },
   })
-      return NextResponse.json(updateProduct, {
-        status: 201,
+      return NextResponse.json(updatedProduct, {
+        status: 200,
       });
     } catch (err) {
       const error = err as { message: string };
