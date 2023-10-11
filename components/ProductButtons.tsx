@@ -18,9 +18,18 @@ const ProductButtons = (props: {
     }
 
     return (
-        <div>
-            <button onClick={handleDelete}>Eliminar</button>
-            <Link href={`/products/${props.productId}`}>Editar</Link>
+        <div className="gap-y-2">
+            <button className="rounded p-2 bg-red-500 font-semibold" onClick={handleDelete}>Eliminar</button>
+            <div className="
+            rounded p-2 
+            bg-amber-500 
+            font-semibold 
+            w-[78px] 
+            text-center
+            mt-2
+            ">
+                <Link href={`/products/${props.productId}`}>Editar</Link>
+            </div>
         </div>
     )
 }
