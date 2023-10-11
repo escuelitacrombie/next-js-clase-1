@@ -25,6 +25,15 @@ model Product {
   image       String   @default("")
 
   @@index([CategoryId])
+  @@map("products")
+}
+
+model User {
+  id           Int    @id @default(autoincrement())
+  email        String @unique
+  hashPassword String
+
+  @@map("users")
 }
 
 
