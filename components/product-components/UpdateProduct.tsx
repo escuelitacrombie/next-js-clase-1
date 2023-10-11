@@ -1,6 +1,6 @@
 "use client"
 
-import { FormValue } from "@/app/products/create/page"
+import { FormValue } from "@/interfaces/formValue"
 import Link from "next/link"
 import React, { useState, ChangeEvent, FormEvent, useCallback } from "react"
 

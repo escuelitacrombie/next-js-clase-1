@@ -1,6 +1,6 @@
 "use client"
 
-import UpdateProduct from "@/components/UpdateProduct"
+import UpdateProduct from "@/components/product-components/UpdateProduct"
 import { useParams } from "next/navigation"
 import getProduct from "./getProduct"
 
