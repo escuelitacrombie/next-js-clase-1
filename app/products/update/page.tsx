@@ -15,9 +15,6 @@ export default function Page() {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      console.log(values);
-      
-
       const parsedFormValues = { ...values, price: Number(values.price) };
       fetch(`/api/products`, {
         method: "PUT",
