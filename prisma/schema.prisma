@@ -19,10 +19,16 @@ model Product {
   @@map("products")
 }
 
+enum Role {
+  Admin
+  Customer
+}
+
 model User {
   id           Int    @id @default(autoincrement())
   email        String @unique
   hashPassword String
+  role         Role   @default(Customer)
 
   @@map("users")
 }
