@@ -2,10 +2,10 @@
 import { useState, useCallback, ChangeEvent, FormEvent } from "react";
 
 type FormValue = {
+  id: number;
   description?: string;
   name?: string;
   price?: string;
-  img?: string;
 };
 
 export default function Page() {
@@ -15,9 +15,9 @@ export default function Page() {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const parsedFormValues = { ...values };
-      fetch("/api/products", {
-        method: "POST",
+      const parsedFormValues = { ...values, price: Number(values.price) };
+      fetch(`/api/products`, {
+        method: "PUT",
         body: JSON.stringify(parsedFormValues),
       });
     },
@@ -30,11 +30,16 @@ export default function Page() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <h1> Crear producto </h1>
+      <h1> update producto </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <label htmlFor="">nombre</label>
+
+        <label htmlFor="">id</label>
+        <input onChange={handleChangeInput} type="text" name="id" id="name" />
+
+        <label htmlFor="">nombre</label>
         <input onChange={handleChangeInput} type="text" name="name" id="name" />
+
         <label htmlFor="">desc</label>
         <input
           onChange={handleChangeInput}
@@ -42,19 +47,13 @@ export default function Page() {
           name="description"
           id="description"
         />
+
         <label htmlFor="">price</label>
         <input
           onChange={handleChangeInput}
           type="number"
           name="price"
           id="price"
-        />
-        <label htmlFor="">imagen</label>
-        <input
-          onChange={handleChangeInput}
-          type="text"
-          name="img"
-          id="img"
         />
         <button type="submit">Submit</button>
       </form>

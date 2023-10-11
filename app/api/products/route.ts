@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
-
     const result = await prisma.product.create({
       data: body,
     });
@@ -19,6 +18,83 @@ export const POST = async (req: NextRequest) => {
       },
       {
         status: 400,
+      }
+    );
+  }
+};
+
+export const DELETE = async (req: NextRequest, {params} : any) => {
+  try { 
+
+    const idFromApi = params.id
+    
+
+    const result = await prisma.product.delete({
+      where:{id: idFromApi}
+    });
+    return NextResponse.json(result, {
+      status: 201,
+    });
+  } catch (err) {
+    const error = err as { message: string };
+    return NextResponse.json(
+      {
+        message: error.message,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+};
+
+export const UPDATE = async (req: NextRequest) => {
+  try {
+    const body = await req.json();
+    const result = await prisma.product.update({
+      where: {
+        id: body.id
+      },
+      data: {
+        name: body.name,
+        description: body.description,
+        price: body.price,
+      }
+    });
+
+    return NextResponse.json(result, {
+      status: 200,
+    });
+  } catch (err) {
+    console.error("Error al actualizar el producto:", err);
+    return NextResponse.json(
+      {
+        message: "Error al actualizar el producto.",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+};
+
+
+
+
+export const GET = async (req: NextRequest) => {
+  try {
+    const result =  await prisma.product.findMany();
+    return NextResponse.json(result, {
+      status: 200,
+    });
+  } catch (err) {
+    console.error("Error al actualizar el producto:", err);
+    return NextResponse.json(
+      {
+        message: "Error al actualizar el producto.",
+      },
+      {
+        status: 500,
       }
     );
   }

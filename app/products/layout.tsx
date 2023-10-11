@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata} from "next";
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: "Products",
@@ -6,5 +7,15 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="bg-gray-400">{children}</div>;
+
+  let b = false;
+
+  return <div className="bg-gray-400">
+     <nav className='gap-3'>
+        <Link className='pr-5' href="/products/create">create product</Link>
+        <Link className='pr-5' href="/products/delete">delete product</Link>
+        <Link className='pr-5' href="/products/update">update product</Link>
+    </nav>
+    {children}
+    </div>;
 }
