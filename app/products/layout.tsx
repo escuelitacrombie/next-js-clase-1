@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="bg-gray-400">{children}</div>;
+  return <div className="bg-green-200">{children}</div>;
 }

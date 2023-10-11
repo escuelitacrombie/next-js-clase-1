@@ -1,10 +1,13 @@
 "use client";
+
+import Link from "next/link";
 import { useState, useCallback, ChangeEvent, FormEvent } from "react";
 
 type FormValue = {
   description?: string;
   name?: string;
   price?: string;
+  image?:string;
 };
 
 export default function Page() {
@@ -29,7 +32,7 @@ export default function Page() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <h1> Crear producto </h1>
+      <h1> Create Product </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input onChange={handleChangeInput} type="text" name="name" id="name" />
@@ -45,7 +48,14 @@ export default function Page() {
           name="price"
           id="price"
         />
+        <input
+          onChange={handleChangeInput}
+          type="text"
+          name="image"
+          id="image"
+        />
         <button type="submit">Submit</button>
+        <Link href="/products">Return to product list</Link>
       </form>
     </main>
   );

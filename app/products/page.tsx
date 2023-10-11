@@ -1,4 +1,7 @@
 import prisma from "@/lib/prisma";
+import Link from "next/link";
+import Image from "next/image";
+import CardsButton from "@/components/cardsButton";
 
 export default async function Page() {
   const allProducts = await prisma.product.findMany();
@@ -8,11 +11,22 @@ export default async function Page() {
       <h1> Todos los productos </h1>
 
       {allProducts.map((product) => (
-        <div key={product.id}>
-          <p>{product.name}</p>
-          <p>{product.description}</p>
+        <div key={product.id} className="flex gap-x-5 bg-slate-200 rounded shadow-xl p-2">
+          <div className="flex-col">
+            <p>{product.name}</p>
+            <p>{product.description}</p>
+            <p>${product.price}</p>
+            {/* <Image src={`/${product.image}`} alt={product.name} width={10} height={10}/> */}
+          </div>
+          <div className="w-[100px]">
+          <CardsButton productId={product.id} />
+          </div>
         </div>
       ))}
+
+      <div className="rounded-md bg-green-400 p-3 mt-4 font-semibold shadow-md">
+        <Link href="/products/create">Crear producto</Link>
+      </div>
     </main>
   );
 }
