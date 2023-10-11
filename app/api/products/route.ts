@@ -41,26 +41,5 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-export const DELETE = async (req: NextRequest) => {
-  try {
-    const id  = await req.json()
 
-    const result = await prisma.product.delete({
-      where: {
-        id: id
-      },
-    })
-    return NextResponse.json(result, { status: 200 })
-  } catch (err) {
-    const error = err as { message: string };
-    return NextResponse.json(
-      {
-        message: error.message,
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-};
 

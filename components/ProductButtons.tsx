@@ -11,9 +11,8 @@ const ProductButtons = (props: {
     const router = useRouter()
 
     const handleDelete = async () => {
-        await fetch("/api/products", {
+        await fetch(`/api/products/${props.productId}`, {
             method: "DELETE",
-            body: JSON.stringify(props.productId)
         })
         router.refresh()
     }

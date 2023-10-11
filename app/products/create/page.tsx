@@ -2,11 +2,18 @@
 import Link from "next/link";
 import { useState, useCallback, ChangeEvent, FormEvent } from "react";
 
+type CategoryInput = {
+  connect: {
+    id: number
+  }
+}
+
 export type FormValue = {
   description?: string;
   name?: string;
   price?: string;
-  image?: string
+  category?: CategoryInput;
+  image?: string;
 };
 
 export default function Page() {
@@ -34,7 +41,11 @@ export default function Page() {
       <h1> Crear producto </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input onChange={handleChangeInput} type="text" name="name" id="name" placeholder="Nombre" />
+        <input onChange={handleChangeInput} 
+        type="text" 
+        name="name" 
+        id="name" 
+        placeholder="Nombre" />
         <input
           onChange={handleChangeInput}
           type="text"

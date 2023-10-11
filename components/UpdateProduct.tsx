@@ -5,8 +5,7 @@ import Link from "next/link"
 import React, { useState, ChangeEvent, FormEvent, useCallback } from "react"
 
 
-const UpdateProduct = (props: { product: any, productId: number }) => {
-    console.log(props.product);
+const UpdateProduct = (props:{ product: any, productId: number }) => {
     
     const [values, setValues] = useState<FormValue>()
 
@@ -23,8 +22,10 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
             body: JSON.stringify(parsedFormValues)
         })
     }
-
+    console.log(props.product);
+    
     return (
+        
         <div>
             <form
                 action="submit"
@@ -34,7 +35,7 @@ const UpdateProduct = (props: { product: any, productId: number }) => {
                 <input
                     onChange={handleChangeInput}
                     type="text"
-                    value={props.product?.name}
+                    value={props.product.name}
                     name="name"
                     id="name"
                     placeholder=""

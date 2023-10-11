@@ -1,12 +1,9 @@
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest, { params: { id } }) => {
-    const productId = Number(id)
+export const GET = async (req: NextRequest, res: NextResponse) => {
     try {
-        const result = await prisma.product.findUnique({
-            where: { id: productId }
-        })
+        const result = await prisma.category.findMany()
         return NextResponse.json(result)
     } catch (err) {
         const error = err as { message: string };
@@ -21,17 +18,16 @@ export const GET = async (req: NextRequest, { params: { id } }) => {
     }
 }
 
-export const PUT = async (req: Request, { params: { id } }) => {
+export const POST = async (req: NextRequest) => {
     try {
-        const productId = Number(id)
-        const body = await req.json()
-        const result = await prisma.product.update({
-            where: { id: productId },
-            data: body
-        })
+        const body = await req.json();
+
+        const result = await prisma.category.create({
+            data: body,
+        });
         return NextResponse.json(result, {
-            status: 200,
-        })
+            status: 201,
+        });
     } catch (err) {
         const error = err as { message: string };
         return NextResponse.json(
@@ -43,15 +39,15 @@ export const PUT = async (req: Request, { params: { id } }) => {
             }
         );
     }
-}
+};
 
-export const DELETE = async (req: NextRequest, { params: { id }}) => {
+export const DELETE = async (req: NextRequest) => {
     try {
-        const productId = Number(id)
+        const id = await req.json()
 
-        const result = await prisma.product.delete({
+        const result = await prisma.category.delete({
             where: {
-                id: productId
+                id: id
             },
         })
         return NextResponse.json(result, { status: 200 })
@@ -67,3 +63,4 @@ export const DELETE = async (req: NextRequest, { params: { id }}) => {
         );
     }
 };
+
