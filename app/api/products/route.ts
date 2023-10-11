@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
-
     const result = await prisma.product.create({
       data: body,
     });
@@ -23,3 +22,22 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
+
+export const DELETE = async (id: string) => {
+  try {
+    const deletedProduct = await prisma.product.delete({
+      where: {
+        id: Number(id)
+      }
+    });
+    return NextResponse.json(deletedProduct)
+  } catch (error) {
+    if (error instanceof Error){
+      return NextResponse.json({
+          message: error.message,
+      },{
+          status: 500,
+      })
+  }
+  }
+}

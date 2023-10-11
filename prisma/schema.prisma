@@ -15,4 +15,13 @@ model Product {
   name        String
   description String
   price       Float
+  img         String
+  categoria   Categoria
+}
+
+enum Categoria {
+  Ropa
+  Zapatillas
+  Collares
+  Maquillaje
 }

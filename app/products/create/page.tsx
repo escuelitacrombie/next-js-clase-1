@@ -5,6 +5,8 @@ type FormValue = {
   description?: string;
   name?: string;
   price?: string;
+  img?: string;
+  categoria?: string;
 };
 
 export default function Page() {
@@ -27,6 +29,13 @@ export default function Page() {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }, []);
 
+  const handleCategoriaChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setValues((prev) => ({ ...prev, categoria: e.target.value }));
+    },
+    []
+  );
+
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
       <h1> Crear producto </h1>
@@ -45,6 +54,31 @@ export default function Page() {
           name="price"
           id="price"
         />
+        <input
+          onChange={handleChangeInput}
+          type="text"
+          name="img"
+          id="img"
+        />
+        <label>
+            <input type="radio" name="categoria" value="Ropa" onChange={handleCategoriaChange}/>
+            Ropa
+        </label>
+
+        <label>
+            <input type="radio" name="categoria" value="Zapatillas" onChange={handleCategoriaChange}/>
+            Zapatillas
+        </label>
+
+        <label>
+            <input type="radio" name="categoria" value="Collares" onChange={handleCategoriaChange}/>
+            Collares
+        </label>
+
+        <label>
+            <input type="radio" name="categoria" value="Maquillaje" onChange={handleCategoriaChange}/>
+            Maquillaje
+        </label>
         <button type="submit">Submit</button>
       </form>
     </main>
