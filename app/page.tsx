@@ -1,7 +1,9 @@
+import {Button} from '@nextui-org/button'; 
+
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
-      <h1> Home </h1>
-    </main>
-  );
+    <div>
+      <Button>Click me</Button>
+    </div>
+  )
 }
