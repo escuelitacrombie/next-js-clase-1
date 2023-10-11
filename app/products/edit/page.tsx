@@ -2,22 +2,27 @@
 import { useState, useCallback, ChangeEvent, FormEvent } from "react";
 
 type FormValue = {
+  id: number;
   description?: string;
   name?: string;
   price?: string;
-  img?: string;
 };
 
 export default function Page() {
-  const [values, setValues] = useState<FormValue>({});
+  const [values, setValues] = useState<FormValue>({
+    id: 0,
+    description: "",
+    name: "",
+    price:"",
+  });
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       const parsedFormValues = { ...values, price: Number(values.price) };
-      fetch("/api/products", {
-        method: "POST",
+      fetch(`/api/products`, {
+        method: "PUT",
         body: JSON.stringify(parsedFormValues),
       });
     },
@@ -30,33 +35,32 @@ export default function Page() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <h1> Crear producto </h1>
+      <h1> update producto </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <p>Name</p>
+
+        <label htmlFor="">id</label>
+        <input onChange={handleChangeInput} type="text" name="id" id="name" />
+
+        <label htmlFor="">nombre</label>
         <input onChange={handleChangeInput} type="text" name="name" id="name" />
-        <p>Description</p>
+
+        <label htmlFor="">desc</label>
         <input
           onChange={handleChangeInput}
           type="text"
           name="description"
           id="description"
         />
-        <p>Price</p>
+
+        <label htmlFor="">price</label>
         <input
           onChange={handleChangeInput}
           type="number"
           name="price"
           id="price"
         />
-        <p>Img</p>
-        <input
-          onChange={handleChangeInput}
-          type="text"
-          name="img"
-          id="img"
-        />
-        <button className="bg-slate-700 border rounded-full p-2" type="submit" >Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </main>
   );
