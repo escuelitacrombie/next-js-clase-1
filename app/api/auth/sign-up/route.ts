@@ -6,11 +6,13 @@ export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
     const hash = await bcrypt.hash(body.password, 10);
+    console.log(body.email, body.password, body.role, hash);
 
     await prisma.user.create({
       data: {
         email: body.email,
         hashPassword: hash,
+        role: body.role,
       },
     });
 
