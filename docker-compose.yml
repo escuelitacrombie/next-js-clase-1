@@ -10,7 +10,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - clase-next-db:/var/lib/postgresql/data
+      - clase-next-db:/var/lib/mysql/data
 
 volumes:
   clase-next-db:
