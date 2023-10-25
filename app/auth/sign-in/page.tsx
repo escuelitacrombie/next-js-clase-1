@@ -1,4 +1,7 @@
 "use client";
+import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useCallback, ChangeEvent, FormEvent } from "react";
 
 type FormValue = {
@@ -8,15 +11,16 @@ type FormValue = {
 
 export default function Page() {
   const [values, setValues] = useState<FormValue>({});
+  const { push } = useRouter();
 
   const handleSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
+    async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      fetch("/api/auth/sign-in", {
-        method: "POST",
-        body: JSON.stringify(values),
-      });
+      const result = await axios.post("/api/auth/sign-in", values);
+      if (result.status === 200) {
+        push("/products");
+      }
     },
     [values]
   );
@@ -31,6 +35,7 @@ export default function Page() {
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
+          className="bg-gray-400"
           onChange={handleChangeInput}
           type="email"
           name="email"
@@ -38,11 +43,15 @@ export default function Page() {
         />
         <input
           onChange={handleChangeInput}
+          className="bg-gray-400"
           type="password"
           name="password"
           id="password"
         />
         <button type="submit">Submit</button>
+        <Link className="mt-2 text-center" href={"/auth/sign-up"}>
+          Create Account
+        </Link>
       </form>
     </main>
   );

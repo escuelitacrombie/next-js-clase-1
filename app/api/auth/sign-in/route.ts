@@ -26,8 +26,6 @@ export const POST = async (req: NextRequest) => {
       hashPasswordUser
     );
 
-    console.log("isPasswordValid", isPasswordValid);
-
     if (!isPasswordValid) {
       throw Error(cannotFindUserError);
     }

@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
-    console.log(body)
 
     const result = await prisma.product.create({
       data: body,
@@ -13,7 +12,6 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(result, {
       status: 201,
     });
-
   } catch (err) {
     const error = err as { message: string };
     return NextResponse.json(
@@ -27,8 +25,6 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-
-
 export const DELETE = async (req: NextRequest) => {
   try {
     const id = await req.json();
@@ -37,7 +33,7 @@ export const DELETE = async (req: NextRequest) => {
       where: {
         id: id,
       },
-    })
+    });
     return NextResponse.json(deleteProduct, {
       status: 201,
     });
@@ -53,4 +49,3 @@ export const DELETE = async (req: NextRequest) => {
     );
   }
 };
-

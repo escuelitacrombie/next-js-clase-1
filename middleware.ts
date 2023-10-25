@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import * as jose from "jose";
 
 export const config = {
-  matcher: ["/dashboard/:path"],
+  matcher: ["/products/:path", "/products/create"],
 };
 
 export async function middleware(request: NextRequest) {
