@@ -13,7 +13,7 @@ export default async function Page() {
           <p>{product.name}</p>
           <p>{product.description}</p>
           <p>{product.price}</p>
-          <img src={product.img} alt="" className="h-14" />
+          {product.img && <img src={product.img} alt="" className="h-14" />}
           <Link href={`/products/${product.id}`}>Edit</Link>
           <Button function="Delete" productId={product.id} />
         </div>
